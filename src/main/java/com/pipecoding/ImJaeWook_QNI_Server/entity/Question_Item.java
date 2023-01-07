@@ -9,12 +9,14 @@ import lombok.experimental.Accessors;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
 @Builder
 @AllArgsConstructor
+@Table(name = "question_item")
 public class Question_Item {
 
     @Id
