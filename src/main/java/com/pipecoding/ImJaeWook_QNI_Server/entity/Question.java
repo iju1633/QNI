@@ -18,10 +18,9 @@ import javax.persistence.*;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;  // question_item 의 id 값을 가져와 set 한 이후 insert 할 것
+
     private String question;
-    private boolean answered;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)

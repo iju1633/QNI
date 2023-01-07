@@ -23,4 +23,5 @@ public class Question_Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String question;
+    private boolean answered;
 }
