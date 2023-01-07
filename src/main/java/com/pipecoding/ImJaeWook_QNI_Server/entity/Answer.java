@@ -1,5 +1,6 @@
 package com.pipecoding.ImJaeWook_QNI_Server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,12 +15,10 @@ import javax.persistence.*;
 @Accessors(chain = true)
 @Builder
 @AllArgsConstructor
-public class User {
+public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String uid;
-    private String nickname;
-    private String pwd;
+    private String answer;
 }
