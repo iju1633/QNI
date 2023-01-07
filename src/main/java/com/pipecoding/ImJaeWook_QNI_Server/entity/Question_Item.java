@@ -6,18 +6,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Entity
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
 @Builder
 @AllArgsConstructor
-public class Answer {
+public class Question_Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String answer;
+    private String question;
 }
