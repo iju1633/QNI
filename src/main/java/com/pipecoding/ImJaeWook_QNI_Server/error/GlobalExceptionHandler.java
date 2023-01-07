@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
     <에러코드 400>
     MethodArgumentNotValidException : DTO 에서 validation 오류
 
-    <에러코드 403>
+    <에러코드 403> // client 에서 처리할 수도 있음
     AccessDeniedException : 로그인 되지 않은 채 서비스 요청
 
     <에러코드 405>
