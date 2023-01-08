@@ -19,7 +19,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(this.swaggerInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.uostime.server.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.pipecoding.ImJaeWook_QNI_Server.controller"))
                 .paths(PathSelectors.any()) // 모든 url 에 대해 명세서 작성
                 .build()
                 .useDefaultResponseMessages(true);
