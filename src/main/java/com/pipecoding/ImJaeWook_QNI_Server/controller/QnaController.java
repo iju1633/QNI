@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-public class QnAController {
+public class QnaController {
 
     /*
      0. 인터셉터 구현해서 로그인 여부 체크하기
@@ -41,7 +41,7 @@ public class QnAController {
 
     private final QnAService qnAService;
 
-    public QnAController(QnAService qnAService) {
+    public QnaController(QnAService qnAService) {
         this.qnAService = qnAService;
     }
 
@@ -68,14 +68,14 @@ public class QnAController {
         return ResponseEntity.ok().body(qnAService.getQuestionList(userId));
     }
 
-    @GetMapping("/question/with-answer/list/userId/{userId}")
+    @GetMapping("/question/answered/list/userId/{userId}")
     @ApiOperation(value = "답변한 질문 반환", notes = "questionId, question, answer 를 포함한 객체가 리스트로 반환된다.")
     public ResponseEntity<List<AnsweredQuestionDTO>> getAnsweredQuestionList(@PathVariable Long userId) {
 
         return ResponseEntity.ok().body(qnAService.getAnsweredQuestionList(userId));
     }
 
-    @GetMapping(value = "/word-cloud/userId/{userId}")
+    @GetMapping(value = "/wordCloud/userId/{userId}")
     @ApiOperation(value = "답변한 질문을 하나의 스트링으로 반환", notes = "여태 답변한 내용을 하나의 값으로 합쳐 반환한다.")
     public ResponseEntity<String> combineAnswersForWordCloud(@PathVariable Long userId) throws IOException {
 

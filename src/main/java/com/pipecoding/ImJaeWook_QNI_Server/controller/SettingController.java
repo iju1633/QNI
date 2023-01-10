@@ -15,7 +15,7 @@ public class SettingController {
         this.settingService = settingService;
     }
 
-    @PatchMapping("/setting/user-info/nickname")
+    @PatchMapping("/setting/user/nickname")
     @ApiOperation(value = "닉네임 수정", notes = "새로운 닉네임과 유저의 id를 받아 작동합니다.")
     public ResponseEntity<?> changeNickname(@RequestBody ChangeNicknameDTO changeNicknameDTO) {
 

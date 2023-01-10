@@ -23,4 +23,10 @@ public class LoginController {
     public ResponseEntity<String> login(@Validated @RequestBody LoginDTO loginDTO) {
         return ResponseEntity.ok().body(loginService.login(loginDTO.getUid(), loginDTO.getPwd()));
     }
+
+    @PostMapping("/user/logout")
+    @ApiOperation(value = "로그아웃", notes = "로그인하면서 생긴 세션과 쿠키를 모두 삭제합니다.")
+    public void fakeLogout() {
+        throw new IllegalStateException("This method shouldn't be called. It's implemented by Spring Security filters.");
+    }
 }

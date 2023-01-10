@@ -4,8 +4,7 @@ import com.pipecoding.ImJaeWook_QNI_Server.dto.AnswerDTO;
 import com.pipecoding.ImJaeWook_QNI_Server.dto.AnswerUpdateDTO;
 import com.pipecoding.ImJaeWook_QNI_Server.dto.AnsweredQuestionDTO;
 import com.pipecoding.ImJaeWook_QNI_Server.dto.QuestionAnswerDTO;
-import com.pipecoding.ImJaeWook_QNI_Server.entity.Question_Answer;
-import com.pipecoding.ImJaeWook_QNI_Server.repository.QuestionTableRepository;
+import com.pipecoding.ImJaeWook_QNI_Server.entity.Question_Answer;성
 import com.pipecoding.ImJaeWook_QNI_Server.repository.QuestionAnswerRepository;
 import com.pipecoding.ImJaeWook_QNI_Server.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -117,11 +116,9 @@ public class QnAService {
 
         for (Question_Answer questionItem : question_answerList) {
             if(!questionItem.getAnswer().equals("")) { // 답변 내용이 있는 걸 찾아서 덧붙임
-                combinedAnswers.append(questionItem.getAnswer());
+                combinedAnswers.append(questionItem.getAnswer()).append(" ");
             }
         }
-
-        combinedAnswers.append(" "); // 다른 질문의 답변과 합쳐질 때 하나의 단어가 되는 것을 피하기 위함
 
         return combinedAnswers.toString();
     }
