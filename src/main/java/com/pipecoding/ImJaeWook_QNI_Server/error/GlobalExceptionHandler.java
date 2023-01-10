@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.MethodNotAllowedException;
 
-//@RestControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
     MethodNotAllowedException : 잘못된 url 로 api 요청하는 경우
 
     <에러코드 500>
-    IllegalStateException : 폼에서 기존의 회원 정보와 중복 발생
+    IllegalStateException : 폼에서 기존의 회원 정보와 중복 발생 / 수정할 답변이 없는데 수정하고자 할때
      */
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

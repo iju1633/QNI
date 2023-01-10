@@ -4,7 +4,7 @@ import com.pipecoding.ImJaeWook_QNI_Server.dto.AnswerDTO;
 import com.pipecoding.ImJaeWook_QNI_Server.dto.AnswerUpdateDTO;
 import com.pipecoding.ImJaeWook_QNI_Server.dto.AnsweredQuestionDTO;
 import com.pipecoding.ImJaeWook_QNI_Server.dto.QuestionAnswerDTO;
-import com.pipecoding.ImJaeWook_QNI_Server.entity.Question_Answer;성
+import com.pipecoding.ImJaeWook_QNI_Server.entity.Question_Answer;
 import com.pipecoding.ImJaeWook_QNI_Server.repository.QuestionAnswerRepository;
 import com.pipecoding.ImJaeWook_QNI_Server.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class QnAService {
 
-         /*
+     /*
      0. 인터셉터 구현해서 로그인 여부 체크하기
      1. 답변 작성하기
      2. 답변 수정하기
@@ -45,6 +45,7 @@ public class QnAService {
 
     private final QuestionAnswerRepository questionAnswerRepository;
     private final UserRepository userRepository;
+
     @Transactional
     public void saveAnswer(AnswerDTO answerDTO) {
 
@@ -63,7 +64,7 @@ public class QnAService {
         // 유저의 question에서 답변한 질문을 찾아 새로운 답을 기입
         Question_Answer question = questionAnswerRepository.getQuestionByIdAndUser(answerUpdateDTO.getQuestionId(), userRepository.getUserById(answerUpdateDTO.getUserId()));
 
-        if(question.getAnswer().equals("")) {
+        if (question.getAnswer().equals("")) {
             throw new IllegalStateException("수정할 답변 내용이 없습니다.");
         }
 
@@ -96,7 +97,7 @@ public class QnAService {
         List<AnsweredQuestionDTO> answeredQuestionList = new ArrayList<>();
 
         for (Question_Answer questionItem : question_answerList) {
-            if(!questionItem.getAnswer().equals("")) { // 답변 내용이 있는 걸 찾는다
+            if (!questionItem.getAnswer().equals("")) { // 답변 내용이 있는 걸 찾는다
                 AnsweredQuestionDTO answeredQuestionDTO = new AnsweredQuestionDTO();
                 answeredQuestionDTO.setQuestionId(questionItem.getId());
                 answeredQuestionDTO.setAnswer(questionItem.getAnswer());
@@ -106,7 +107,7 @@ public class QnAService {
             }
         }
 
-        return  answeredQuestionList;
+        return answeredQuestionList;
     }
 
     public String combineAnswersForWordCloud(Long userId) {
@@ -115,7 +116,7 @@ public class QnAService {
         StringBuilder combinedAnswers = new StringBuilder();   // 출력할 문자열
 
         for (Question_Answer questionItem : question_answerList) {
-            if(!questionItem.getAnswer().equals("")) { // 답변 내용이 있는 걸 찾아서 덧붙임
+            if (!questionItem.getAnswer().equals("")) { // 답변 내용이 있는 걸 찾아서 덧붙임
                 combinedAnswers.append(questionItem.getAnswer()).append(" ");
             }
         }

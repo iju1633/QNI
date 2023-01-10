@@ -31,7 +31,7 @@ public class RegisterService {
     public void registerUser(RegisterDTO registerDTO) {
 
         // 회원가입 폼에서 아이디 혹은 닉네임이 기존 회원과 중복되는 값이 있는 지 확인
-        // 동일하면 그대로 회원가입 진행, 아니라면 error 를 뱉어서 프론트에서 원하는 화면을 보여줄 수 있도록 할 것
+        // 동일하면 그대로 회원가입 진행, 아니라면 error 를 뱉음
         if (checkNickNameDuplicate(registerDTO.getNickname())) {
             throw new IllegalStateException("이미 사용 중인 닉네임이 있습니다.");
         } else if (checkUidDuplicate(registerDTO.getUid())) {
