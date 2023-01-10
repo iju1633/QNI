@@ -18,7 +18,7 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/user/login")
     @ApiOperation(value = "로그인", notes = "아이디와 비밀번호로 로그인하며, 로그인 성공 시, 유저의 nickname 을 반환합니다.")
     public ResponseEntity<String> login(@Validated @RequestBody LoginDTO loginDTO) {
         return ResponseEntity.ok().body(loginService.login(loginDTO.getUid(), loginDTO.getPwd()));

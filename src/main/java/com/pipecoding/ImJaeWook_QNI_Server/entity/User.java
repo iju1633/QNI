@@ -1,12 +1,11 @@
 package com.pipecoding.ImJaeWook_QNI_Server.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,6 +13,7 @@ import javax.persistence.*;
 @Accessors(chain = true)
 @Builder
 @AllArgsConstructor
+@ToString(exclude = "questionAnswerList")
 public class User {
 
     @Id
@@ -22,4 +22,7 @@ public class User {
     private String uid;
     private String nickname;
     private String pwd;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Question_Answer> questionAnswerList = new ArrayList<>();
 }

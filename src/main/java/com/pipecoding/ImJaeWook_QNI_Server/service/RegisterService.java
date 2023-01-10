@@ -1,12 +1,19 @@
 package com.pipecoding.ImJaeWook_QNI_Server.service;
 
 import com.pipecoding.ImJaeWook_QNI_Server.dto.RegisterDTO;
+import com.pipecoding.ImJaeWook_QNI_Server.entity.Question_Answer;
+import com.pipecoding.ImJaeWook_QNI_Server.entity.Question_Table;
 import com.pipecoding.ImJaeWook_QNI_Server.entity.User;
+import com.pipecoding.ImJaeWook_QNI_Server.repository.QuestionAnswerRepository;
+import com.pipecoding.ImJaeWook_QNI_Server.repository.QuestionTableRepository;
 import com.pipecoding.ImJaeWook_QNI_Server.repository.RegisterRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -15,6 +22,9 @@ public class RegisterService {
 
     private final RegisterRepository registerRepository;
     private final PasswordEncoder passwordEncoder;
+
+    private final QuestionTableRepository questionTableRepository;
+    private final QuestionAnswerRepository questionAnswerRepository;
 
     public void registerUser(RegisterDTO registerDTO) {
 
@@ -31,8 +41,25 @@ public class RegisterService {
         user.setUid(registerDTO.getUid());
         user.setNickname(registerDTO.getNickname());
         user.setPwd(passwordEncoder.encode(registerDTO.getPwd()));
+        registerRepository.save(user);
 
-        // DB에 사용자 저장
+        // user 에게 보일 여러 질문들도 초기화해서 set
+        List<Question_Answer> questionAnswerList = new ArrayList<>();
+        for (Question_Table questionTableItem: questionTableRepository.findAll()) {
+            Question_Answer questionAnswer = new Question_Answer();
+
+            questionAnswer.setUser(user);
+            questionAnswer.setQuestion(questionTableItem.getQuestion());
+            questionAnswer.setAnswer("");
+
+            questionAnswerRepository.save(questionAnswer);
+
+            questionAnswerList.add(questionAnswer);
+
+        }
+        user.setQuestionAnswerList(questionAnswerList);
+
+        // 연관관계(question : user = n : 1) 때문에 한번 더 저장
         registerRepository.save(user);
     }
 

@@ -12,6 +12,6 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoginCheckInterceptor()) // 인터셉터 등록
                 .order(1) // 낮을 수록 먼저 호출
-                .addPathPatterns("/answer/**", "/question/**", "/word/**"); //인터셉터를 적용할 url 패턴
+                .addPathPatterns("/answer/**", "/question/**", "/word-cloud/**", "/setting/**"); //인터셉터를 적용할 url 패턴
     }
 }
