@@ -18,7 +18,8 @@ import javax.persistence.*;
 public class Question {
 
     @Id
-    private Long id;  // question_item 의 id 값을 가져와 set 한 이후 insert 할 것
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String question;
 
@@ -31,4 +32,6 @@ public class Question {
     @OneToOne(mappedBy = "question", cascade = CascadeType.REMOVE)
     @JoinColumn(name = "answer_id")
     private Answer answer;
+
+    private boolean isAnswered;
 }
