@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class RegisterService {
     private final QuestionTableRepository questionTableRepository;
     private final QuestionAnswerRepository questionAnswerRepository;
 
+    @Transactional
     public void registerUser(RegisterDTO registerDTO) {
 
         // 회원가입 폼에서 아이디 혹은 닉네임이 기존 회원과 중복되는 값이 있는 지 확인

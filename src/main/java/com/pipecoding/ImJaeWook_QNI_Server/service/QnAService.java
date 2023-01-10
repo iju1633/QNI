@@ -64,6 +64,10 @@ public class QnAService {
         // 유저의 question에서 답변한 질문을 찾아 새로운 답을 기입
         Question_Answer question = questionAnswerRepository.getQuestionByIdAndUser(answerUpdateDTO.getQuestionId(), userRepository.getUserById(answerUpdateDTO.getUserId()));
 
+        if(question.getAnswer().equals("")) {
+            throw new IllegalStateException("수정할 답변 내용이 없습니다.");
+        }
+
         question.setAnswer(answerUpdateDTO.getNewAnswer());
 
         // save
@@ -116,6 +120,8 @@ public class QnAService {
                 combinedAnswers.append(questionItem.getAnswer());
             }
         }
+
+        combinedAnswers.append(" "); // 다른 질문의 답변과 합쳐질 때 하나의 단어가 되는 것을 피하기 위함
 
         return combinedAnswers.toString();
     }
