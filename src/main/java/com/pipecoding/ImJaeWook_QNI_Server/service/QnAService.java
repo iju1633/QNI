@@ -52,6 +52,10 @@ public class QnAService {
         // 유저의 question에서 답변한 질문을 찾아 답을 기입
         Question_Answer question = questionAnswerRepository.getQuestionByIdAndUser(answerDTO.getQuestionId(), userRepository.getUserById(answerDTO.getUserId()));
 
+        if (!question.getAnswer().equals("")) {
+            throw new IllegalStateException("이미 답변이 작성된 질문입니다.");
+        }
+
         question.setAnswer(answerDTO.getAnswer());
 
         // save
