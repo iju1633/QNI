@@ -46,7 +46,7 @@ public class WebSecurityConfig {
                         .permitAll()
                         .logoutSuccessHandler((request, response, authentication) -> response.setStatus(HttpServletResponse.SC_OK)
                         )
-                        .logoutUrl("/logout")
+                        .logoutUrl("/user/logout")
                         .logoutSuccessUrl("/")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID", "remember-me"))
