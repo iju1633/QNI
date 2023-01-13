@@ -1,5 +1,7 @@
 package com.pipecoding.ImJaeWook_QNI_Server.service;
 
+import com.pipecoding.ImJaeWook_QNI_Server.dto.LoginDTO;
+import com.pipecoding.ImJaeWook_QNI_Server.dto.LoginResponseDTO;
 import com.pipecoding.ImJaeWook_QNI_Server.entity.User;
 import com.pipecoding.ImJaeWook_QNI_Server.repository.LoginRepository;
 import com.pipecoding.ImJaeWook_QNI_Server.util.Const;
@@ -23,9 +25,9 @@ public class LoginService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public String login(String uid, String pwd) {
+    public LoginResponseDTO login(LoginDTO loginDTO) {
 
-        User loginMember = loginRepository.getUserByUid(uid);
+        User loginMember = loginRepository.getUserByUid(loginDTO.getUid());
         log.info(String.valueOf(loginMember));
 
         // 아이디 존재하지 않는 경우
@@ -35,11 +37,11 @@ public class LoginService {
 
         // 관리자/일반 테스트/일반 유저 로그인
         if (loginMember.getUid().equals(Const.TEST_USER_UID)) { // 테스트 계정의 경우
-            if (!pwd.equals(Const.TEST_PWD)) {
+            if (!loginDTO.getPwd().equals(Const.TEST_PWD)) {
                 throw new IllegalArgumentException("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
             }
         } else { // 테스트 계정이 아닌 경우
-            if (!passwordEncoder.matches(pwd, loginMember.getPwd())) {
+            if (!passwordEncoder.matches(loginDTO.getPwd(), loginMember.getPwd())) {
                 throw new IllegalArgumentException("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
             }
         }
@@ -52,6 +54,9 @@ public class LoginService {
         log.info("기존의 세션 반환 및 혹은 세션을 생성하였습니다.");
         log.info("해당 세션 : " + session);
 
-        return loginMember.getNickname();
+        LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
+        loginResponseDTO.setNickname(loginMember.getNickname());
+
+        return loginResponseDTO;
     }
 }
