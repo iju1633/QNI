@@ -56,6 +56,7 @@ public class LoginService {
 
         LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
         loginResponseDTO.setNickname(loginMember.getNickname());
+        loginResponseDTO.setUserId(loginMember.getId());
 
         return loginResponseDTO;
     }

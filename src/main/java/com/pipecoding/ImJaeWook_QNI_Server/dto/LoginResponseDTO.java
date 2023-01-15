@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class LoginResponseDTO {
 
+    private Long userId;
     private String nickname;
 }
