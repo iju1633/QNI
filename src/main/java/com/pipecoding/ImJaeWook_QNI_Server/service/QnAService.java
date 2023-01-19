@@ -1,9 +1,6 @@
 package com.pipecoding.ImJaeWook_QNI_Server.service;
 
-import com.pipecoding.ImJaeWook_QNI_Server.dto.AnswerDTO;
-import com.pipecoding.ImJaeWook_QNI_Server.dto.AnswerUpdateDTO;
-import com.pipecoding.ImJaeWook_QNI_Server.dto.AnsweredQuestionDTO;
-import com.pipecoding.ImJaeWook_QNI_Server.dto.QuestionAnswerDTO;
+import com.pipecoding.ImJaeWook_QNI_Server.dto.*;
 import com.pipecoding.ImJaeWook_QNI_Server.entity.Question_Answer;
 import com.pipecoding.ImJaeWook_QNI_Server.repository.QuestionAnswerRepository;
 import com.pipecoding.ImJaeWook_QNI_Server.repository.UserRepository;
@@ -114,7 +111,7 @@ public class QnAService {
         return answeredQuestionList;
     }
 
-    public String combineAnswersForWordCloud(Long userId) {
+    public WordCloudStringDTO combineAnswersForWordCloud(Long userId) {
         List<Question_Answer> question_answerList = questionAnswerRepository.getAllByUser(userRepository.getUserById(userId));
 
         StringBuilder combinedAnswers = new StringBuilder();   // 출력할 문자열
@@ -125,6 +122,9 @@ public class QnAService {
             }
         }
 
-        return combinedAnswers.toString();
+        WordCloudStringDTO wordCloudStringDTO = new WordCloudStringDTO();
+        wordCloudStringDTO.setCombinedAnswer(combinedAnswers.toString());
+
+        return wordCloudStringDTO;
     }
 }

@@ -1,16 +1,12 @@
 package com.pipecoding.ImJaeWook_QNI_Server.controller;
 
-import com.pipecoding.ImJaeWook_QNI_Server.dto.AnswerDTO;
-import com.pipecoding.ImJaeWook_QNI_Server.dto.AnswerUpdateDTO;
-import com.pipecoding.ImJaeWook_QNI_Server.dto.AnsweredQuestionDTO;
-import com.pipecoding.ImJaeWook_QNI_Server.dto.QuestionAnswerDTO;
+import com.pipecoding.ImJaeWook_QNI_Server.dto.*;
 import com.pipecoding.ImJaeWook_QNI_Server.service.QnAService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -77,7 +73,7 @@ public class QnaController {
 
     @GetMapping(value = "/wordCloud/userId/{userId}")
     @ApiOperation(value = "답변한 질문을 하나의 스트링으로 반환", notes = "여태 답변한 내용을 하나의 값으로 합쳐 반환한다.")
-    public ResponseEntity<String> combineAnswersForWordCloud(@PathVariable Long userId) throws IOException {
+    public ResponseEntity<WordCloudStringDTO> combineAnswersForWordCloud(@PathVariable Long userId) {
 
         return ResponseEntity.ok().body(qnAService.combineAnswersForWordCloud(userId));
     }
