@@ -31,6 +31,7 @@ public class GlobalExceptionHandler {
 
     <에러코드 500>
     IllegalStateException : 폼에서 기존의 회원 정보와 중복 발생 / 수정할 답변이 없는데 수정하고자 할때
+    IllegalArgumentException : 로그인 시 아이디 존재하지 않거나 비밀번호 틀렸을 때
      */
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -56,6 +57,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalStateException.class)
     public ResponseEntity<ErrorResponse> illegalStateExceptionHandler(IllegalStateException e) {
+
+        log.error(e.getMessage());
+        return ResponseEntity.internalServerError().body(new ErrorResponse("500", e.getMessage()));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> illegalArgumentExceptionHandler(IllegalArgumentException e) {
 
         log.error(e.getMessage());
         return ResponseEntity.internalServerError().body(new ErrorResponse("500", e.getMessage()));
