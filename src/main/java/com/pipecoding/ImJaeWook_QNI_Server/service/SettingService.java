@@ -1,6 +1,7 @@
 package com.pipecoding.ImJaeWook_QNI_Server.service;
 
 import com.pipecoding.ImJaeWook_QNI_Server.dto.ChangeNicknameDTO;
+import com.pipecoding.ImJaeWook_QNI_Server.dto.ChangeNicknameResponseDTO;
 import com.pipecoding.ImJaeWook_QNI_Server.entity.User;
 import com.pipecoding.ImJaeWook_QNI_Server.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.List;
 public class SettingService {
 
     private final UserRepository userRepository;
-    public void changeNickname(ChangeNicknameDTO changeNicknameDTO) {
+    public ChangeNicknameResponseDTO changeNickname(ChangeNicknameDTO changeNicknameDTO) {
 
         User user = userRepository.getUserById(changeNicknameDTO.getUserId());
 
@@ -30,6 +31,11 @@ public class SettingService {
 
         user.setNickname(changeNicknameDTO.getNickname());
         userRepository.save(user);
+
+        ChangeNicknameResponseDTO changeNicknameResponseDTO = new ChangeNicknameResponseDTO();
+        changeNicknameResponseDTO.setNewNickname(user.getNickname());
+
+        return changeNicknameResponseDTO;
     }
 
     public void withdrawal(Long userId) {
