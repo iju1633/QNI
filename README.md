@@ -1,4 +1,4 @@
-# QNI (2023, Pipecoding Club Assignment)
+# QNI (Question aNd I)
 
 ![Java](https://img.shields.io/badge/Java-4285F4?style=flat-square&logo=Java&logoColor=white)
 ![Spring-Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=Spring-Boot&logoColor=white)
